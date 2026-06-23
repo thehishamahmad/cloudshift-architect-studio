@@ -1,216 +1,253 @@
 # CloudShift Architect Studio
 
-Enterprise Cloud Architecture Assessment, Sizing, Cost Optimization and Migration Planning Platform for Google Cloud.
+Enterprise Cloud Architecture Assessment, Workload Sizing, Security, Resiliency, and Migration Planning Platform for Google Cloud.
 
-CloudShift Architect Studio helps Solution Architects, Presales Engineers, Cloud Consultants, and Technical Teams rapidly assess customer requirements and generate architecture recommendations, recovery strategies, security controls, and infrastructure planning guidance based on industry best practices.
+CloudShift Architect Studio is a rules-driven assessment platform designed to help Solution Architects, Presales Engineers, Cloud Consultants, and Enterprise Architects rapidly evaluate workloads and generate architecture recommendations for Google Cloud.
 
----
-
-## Overview
-
-CloudShift Architect Studio is a browser-based architecture assessment platform designed to accelerate cloud discovery workshops, solution assessments, and high-level architecture design activities.
-
-The platform converts business and technical requirements into actionable Google Cloud architecture recommendations using a deterministic rules engine.
-
-Unlike generic architecture generators, CloudShift incorporates real-world enterprise considerations such as:
-
-* Availability and resilience requirements
-* Disaster recovery planning
-* Security and compliance controls
-* Backup retention strategies
-* Traffic and growth patterns
-* Industry-specific workloads
-* Cost optimization considerations
+The platform transforms business, technical, operational, and resiliency requirements into a structured cloud architecture blueprint, including compute platform selection, workload sizing, security recommendations, disaster recovery guidance, and architecture visualization.
 
 ---
 
-## Key Features
+## Key Capabilities
 
-### Architecture Assessment
+### Architecture Assessment Engine
 
-Generate architecture recommendations based on:
+Analyze workload requirements and automatically generate:
 
-* Industry Sector
-* Customer Challenges
-* Workload Profiles
-* Workload Characteristics
-* Traffic Patterns
-* Security Requirements
-* Recovery Tier
+* Architecture recommendations
+* Service selection
+* Security controls
+* Recovery and disaster recovery design
+* Operational guidance
 
-### Recovery & Disaster Recovery Planning
+---
+
+### Workload Sizing Engine (v3.1)
+
+Automatically determines the most suitable compute platform and provides presales-level sizing guidance for:
+
+* Cloud Run
+* Google Kubernetes Engine (GKE)
+* Compute Engine
+
+Sizing outputs include:
+
+* Compute sizing
+* Memory recommendations
+* Autoscaling guidance
+* High availability considerations
+* Platform-specific deployment recommendations
+
+---
+
+### Industry-Aware Recommendations
+
+CloudShift adapts recommendations based on workload type and industry requirements.
+
+Supported sectors include:
+
+* Government
+* GLC / Public Sector
+* Finance / Banking
+* Healthcare
+* Education
+* Utilities
+* Manufacturing
+* Telecommunications
+* Retail / E-Commerce
+* Technology / SaaS
+* Oil & Gas
+* Media & Streaming
+
+---
+
+### Recovery & Disaster Recovery Engine
 
 Automatically generates:
 
-* RTO recommendations
-* RPO recommendations
-* Backup strategies
-* Recovery architecture guidance
+* Recovery Time Objective (RTO)
+* Recovery Point Objective (RPO)
+* Backup retention strategies
+* High availability guidance
+* Disaster recovery recommendations
 
-### Workload-Aware Recommendations
+Supported recovery profiles:
 
-Supports multiple workload profiles:
+* Tier 1 – Mission Critical
+* Tier 2 – Production Resilient
+* Tier 3 – Standard Production
+* Tier 4 – Cost Optimized
 
-* Web Applications
-* Mobile Backends
-* API Services
-* LMS Platforms
-* ERP Systems
-* CRM Systems
-* Government Portals
-* Citizen Portals
-* E-Commerce Platforms
-* Data Analytics Platforms
-* AI Platforms
-* Machine Learning Platforms
-* IoT Platforms
-* Business Intelligence Platforms
+---
 
-### Security Recommendations
+### Security Recommendation Engine
 
-Generates recommendations for:
+Generates contextual security recommendations based on workload characteristics and business requirements.
+
+Examples include:
 
 * Cloud Armor
-* IAM
-* Identity-Aware Proxy (IAP)
 * Secret Manager
-* Cloud KMS
+* Cloud KMS (CMEK)
+* Identity-Aware Proxy (IAP)
 * VPC Service Controls
+
+---
 
 ### Architecture Visualization
 
 Automatically generates:
 
-* Mermaid-based architecture diagrams
-* Layered architecture views
-* Security, application, and data flow visualization
+* Layered architecture diagrams
+* Service topology diagrams
+* Security architecture views
 
-### Export Capabilities
-
-Export architecture assessments as Markdown documents suitable for:
-
-* Customer Proposals
-* High-Level Design (HLD) Documents
-* Internal Architecture Reviews
-* Discovery Workshop Reports
+Using Mermaid-based diagram generation.
 
 ---
 
-## Supported Industry Sectors
+### Report Generation
 
-* Technology / SaaS
-* Finance / Banking
-* Healthcare
-* Retail / E-Commerce
-* Education
-* Government
-* GLC / Public Sector
-* Manufacturing
-* Utilities
-* Telecommunications
-* Transportation & Logistics
-* Insurance
-* Oil & Gas
-* Property & Construction
-
----
-
-## Architecture Assessment Framework
-
-CloudShift evaluates customer environments across multiple dimensions:
-
-```text
-Industry Sector
-        ↓
-Customer Challenges
-        ↓
-Workload Profiles
-        ↓
-Workload Characteristics
-        ↓
-Traffic & Growth Patterns
-        ↓
-Recovery Requirements
-        ↓
-Architecture Recommendations
-```
-
-Generated outputs include:
+Generate architecture assessment reports including:
 
 * Executive Summary
-* Architecture Summary
-* Recommended Services
+* Architecture Overview
+* Workload Sizing Recommendations
+* Recovery & DR Strategy
 * Security Recommendations
-* Recovery & DR Design
-* Backup Strategy
-* Assumptions
-* Risks
-* Mermaid Topology Diagram
+* Cost Optimization Guidance
+* Architecture Topology Diagram
+
+Export format:
+
+* Markdown
 
 ---
 
-## Current Architecture
+## Current Architecture Flow
 
-CloudShift Architect Studio is currently implemented as a lightweight client-side application:
+Assessment Inputs
 
-* HTML
-* CSS
-* JavaScript
+↓
+
+Rules Engine
+
+↓
+
+Compute Platform Selection
+
+↓
+
+Workload Sizing Engine
+
+↓
+
+Security & Compliance Engine
+
+↓
+
+Recovery & DR Engine
+
+↓
+
+Architecture Recommendation
+
+↓
+
+Mermaid Topology Generation
+
+↓
+
+Markdown Report Export
+
+---
+
+## Supported Compute Platforms
+
+### Cloud Run
+
+Recommended for:
+
+* Stateless applications
+* Containerized workloads
+* APIs
+* Event-driven applications
+* Cloud-native platforms
+
+### Google Kubernetes Engine (GKE)
+
+Recommended for:
+
+* Microservices platforms
+* Kubernetes-native environments
+* Multi-service container ecosystems
+
+### Compute Engine
+
+Recommended for:
+
+* Legacy applications
+* VM-based workloads
+* Lift-and-shift migrations
+* Infrastructure-dependent systems
+
+---
+
+## Technology Stack
+
+* HTML5
+* CSS3
+* Vanilla JavaScript
 * Mermaid.js
-* Browser Local Storage
 
-No backend services are currently required.
+No backend services.
+
+No databases.
+
+No external APIs.
+
+No AI model dependencies.
+
+All assessment logic executes locally in the browser.
+
+---
+
+## Current Version
+
+### v3.1.1
+
+Highlights:
+
+* Workload Sizing Engine
+* Cloud Run sizing
+* GKE sizing
+* Compute Engine sizing
+* Industry-aware recommendations
+* Architecture consistency validation
+* Security recommendation engine
+* Recovery & disaster recovery planning
+* Mermaid topology generation
+* Markdown report export
 
 ---
 
 ## Roadmap
 
-### Phase 1 (Completed)
+### v3.2 – Migration Assessment Engine
 
-* Architecture Assessment Engine
-* Recovery Tier Engine
-* Backup Strategy Engine
-* Customer Challenges Framework
-* Workload Profiles
-* Workload Characteristics
-* Industry Profiles
-* Mermaid Architecture Diagrams
-* Markdown Export
+Planned capabilities:
 
-### Phase 2 (In Progress)
+* On-Premises to GCP assessment
+* Azure to GCP assessment
+* AWS to GCP assessment
+* AliCloud to GCP assessment
 
-* Infrastructure Sizing Engine
-* Capacity-Based Recommendations
-* Cost Estimation Engine
+Outputs:
 
-### Phase 3 (Planned)
-
-* Migration Assessment Engine
-* Current Environment Discovery
-* Azure to GCP Mapping
-* AWS to GCP Mapping
-* On-Premises Modernization Guidance
-
-### Phase 4 (Future)
-
-* AI-Assisted Architecture Recommendations
-* Multi-Cloud Assessment
-* Proposal Generation
-* Executive Reporting
-
----
-
-## Screenshots
-
-*Add screenshots here.*
-
----
-
-## Disclaimer
-
-CloudShift Architect Studio is intended to accelerate architecture assessment and solution design activities.
-
-All generated recommendations should be reviewed and validated by qualified cloud architects before implementation in production environments.
+* Migration complexity assessment
+* Service mapping
+* Migration strategy recommendations
+* Modernization opportunities
 
 ---
 
@@ -220,4 +257,4 @@ Hisham Ahmad
 
 Google Cloud Solution Architect
 
-Malaysia
+Cloud Architecture | Presales Engineering | Cloud Modernization | Workload Assessment
