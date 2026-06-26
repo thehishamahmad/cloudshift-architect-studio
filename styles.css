@@ -107,18 +107,24 @@ body {
 }
 
 .brand-mark img {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   display: block;
   object-fit: contain;
 
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,.20));
+  filter:
+    drop-shadow(0 0 3px rgba(180, 235, 255, 0.18))
+    drop-shadow(0 5px 10px rgba(0, 0, 0, 0.22));
+
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .brand-mark img:hover {
   transform: translateY(-1px);
-  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.38));
+
+  filter:
+    drop-shadow(0 0 5px rgba(180, 235, 255, 0.25))
+    drop-shadow(0 8px 16px rgba(0, 0, 0, 0.28));
 }
 
 .brand-copy {
