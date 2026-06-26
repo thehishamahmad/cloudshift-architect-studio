@@ -112,22 +112,11 @@ body {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 20px rgba(11, 23, 37, 0.2);
 }
 
-.brand-mark-diamond {
-  width: 14px;
-  height: 14px;
-  border: 2px solid #9ef0c2;
-  border-radius: 2px;
-  transform: rotate(45deg);
-  position: relative;
-  box-shadow: 0 0 14px rgba(112, 231, 165, 0.25);
-}
-
-.brand-mark-diamond::after {
-  content: '';
-  position: absolute;
-  inset: 3px;
-  border: 1px solid rgba(214, 255, 231, 0.9);
-  border-radius: 1px;
+.brand-mark img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  display: block;
 }
 
 .brand-copy {
