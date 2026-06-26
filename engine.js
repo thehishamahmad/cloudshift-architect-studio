@@ -1,5 +1,5 @@
 /**
- * CloudShift Architect Studio - Heuristics Rules Engine (Version 3.2 RC)
+ * CloudShift Architect Studio - Heuristics Rules Engine (Version 3.3)
  * Fully rules-driven combinatorics engine mapping customer challenges, workload profiles,
  * characteristics, traffic parameters, recovery tiers, sizing tiers, and retention rules to Google Cloud assessments.
  */
@@ -50,9 +50,7 @@ const supportedCharacteristicProfiles = Object.freeze([
   'microservices',
   'event-driven',
   'realtime',
-  'batch',
-  'public-facing',
-  'internal-only'
+  'batch'
 ]);
 
 const characteristicLabelsMap = Object.freeze({
@@ -61,9 +59,7 @@ const characteristicLabelsMap = Object.freeze({
   microservices: 'Microservices',
   'event-driven': 'Event-Driven',
   realtime: 'Real-Time Processing',
-  batch: 'Batch Processing',
-  'public-facing': 'Public Facing',
-  'internal-only': 'Internal Only'
+  batch: 'Batch Processing'
 });
 
 function normalizeCharacteristicProfiles(values = [], workloads = []) {

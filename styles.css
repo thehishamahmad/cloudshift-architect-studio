@@ -1,5 +1,5 @@
 /* 
- * CloudShift Architect Studio v3.2 RC - Custom Stylesheets
+ * CloudShift Architect Studio v3.3 - Custom Stylesheets
  */
 
 /* --- Fonts & Variables --- */
@@ -1486,12 +1486,51 @@ select:focus {
 }
 
 .diagram-controls {
-  position: absolute;
-  top: 16px;
-  right: 16px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 8px;
-  z-index: 5;
+  margin-top: 0;
+}
+
+.operations-panel {
+  width: min(920px, 92%);
+  margin: 0 auto;
+  padding: 18px 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 2px rgba(60,64,67,0.05);
+  text-align: center;
+}
+
+.operations-panel-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+  letter-spacing: 0;
+}
+
+.operations-services {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.operations-service-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--bg-hover);
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .btn-secondary {

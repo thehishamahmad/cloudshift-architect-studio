@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CloudShift Architect Studio v3.2 RC - Architecture Assessment and Workload Sizing</title>
+  <title>CloudShift Architect Studio v3.3 - Architecture Assessment and Workload Sizing</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./cloudshift-favicon.png">
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="header-actions">
-        <span class="version-badge">v3.2 RC</span>
+        <span class="version-badge">v3.3</span>
         <a class="portfolio-link" href="../index.html" aria-label="Back to Portfolio">
           <span class="portfolio-arrow" aria-hidden="true">&larr;</span>
           <span>Back to Portfolio</span>
@@ -240,14 +240,6 @@
                   <label class="checkbox-option">
                     <input type="checkbox" name="characteristics" value="batch">
                     <span>Batch Processing</span>
-                  </label>
-                  <label class="checkbox-option">
-                    <input type="checkbox" name="characteristics" value="public-facing" checked>
-                    <span>Public Facing</span>
-                  </label>
-                  <label class="checkbox-option">
-                    <input type="checkbox" name="characteristics" value="internal-only">
-                    <span>Internal Only</span>
                   </label>
                 </div>
               </div>
@@ -650,17 +642,23 @@
                 
                 <!-- Diagram Surface -->
                 <div class="diagram-container">
-                  <div class="diagram-controls">
-                    <button class="btn btn-secondary" id="btn-copy-mermaid">
-                      <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
-                      Copy Mermaid Markup
-                    </button>
-                  </div>
                   <div class="diagram-wrapper">
                     <div class="mermaid" id="mermaid-graph">
                       <!-- Dynamically rendered -->
                     </div>
                   </div>
+                </div>
+                <div class="operations-panel" id="operations-panel" hidden>
+                  <div class="operations-panel-title">Operations &amp; Platform Services</div>
+                  <div class="operations-services" id="operations-services">
+                    <!-- Rendered dynamically -->
+                  </div>
+                </div>
+                <div class="diagram-controls">
+                  <button class="btn btn-secondary" id="btn-copy-mermaid">
+                    <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+                    Copy Mermaid
+                  </button>
                 </div>
 
                 <!-- Code Accordion/Debug view -->

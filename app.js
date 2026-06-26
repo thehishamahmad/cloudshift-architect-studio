@@ -1,5 +1,5 @@
 /**
- * CloudShift Architect Studio - Front-end App Controller (Version 3.2 RC)
+ * CloudShift Architect Studio - Front-end App Controller (Version 3.3)
  * Coordinates inputs, workload sizing, local history, Mermaid rendering, and
  * Markdown downloads for the architecture assessment platform.
  */
@@ -33,6 +33,8 @@ const outputRisks = document.getElementById('output-risks');
 const outputSecurity = document.getElementById('output-security');
 const outputCost = document.getElementById('output-cost');
 const outputMermaidRaw = document.getElementById('output-mermaid-raw');
+const operationsPanel = document.getElementById('operations-panel');
+const operationsServices = document.getElementById('operations-services');
 // Outputs: Workload Sizing (Version 3.1)
 const customerDiscoverySummary = document.getElementById('customer-discovery-summary');
 const assessmentAssumptionSummary = document.getElementById('assessment-assumption-summary');
@@ -179,8 +181,6 @@ const characteristicLabels = Object.freeze({
   realtime: 'Real-Time Processing',
   batch: 'Batch Processing',
   'ai-ml': 'AI/ML Enabled',
-  'public-facing': 'Public Facing',
-  'internal-only': 'Internal Only',
   'zero-trust': 'Zero-Trust Access',
   'legacy-vm-dependency': 'Legacy VM Dependency',
   'kubernetes-required': 'Kubernetes Required',
@@ -205,6 +205,83 @@ function listLabels(values, labels, fallback = 'Not specified') {
   const normalized = Array.isArray(values) ? values.filter(Boolean) : [];
   if (!normalized.length) return fallback;
   return normalized.map(value => labels[value] || value).join(', ');
+}
+
+function normalizeAccessPattern(value) {
+  return Object.prototype.hasOwnProperty.call(accessPatternLabels, value) ? value : 'public';
+}
+
+function getHybridServiceNames(rec) {
+  const hybridServices = rec?.hybridServices || {};
+  return Object.values(hybridServices)
+    .filter(Array.isArray)
+    .flatMap(services => services.map(service => service?.name).filter(Boolean));
+}
+
+function getRecommendationServiceNames(rec) {
+  return Array.isArray(rec?.services)
+    ? rec.services.map(service => service?.name).filter(Boolean)
+    : [];
+}
+
+function collectOperationsServices(rec) {
+  const names = [
+    ...getRecommendationServiceNames(rec),
+    ...getHybridServiceNames(rec)
+  ];
+  const hasService = pattern => names.some(name => pattern.test(String(name)));
+  const services = [];
+  const add = (id, label, available) => {
+    if (available && !services.some(service => service.id === id)) services.push({ id, label });
+  };
+
+  add('monitoring', 'Cloud Monitoring', hasService(/Cloud Monitoring/i));
+  add('logging', 'Cloud Logging', hasService(/Cloud Logging/i));
+  add('backup', 'Backup & Recovery', Array.isArray(rec?.backupStrategy) && rec.backupStrategy.length > 0);
+  add('secret-manager', 'Secret Manager', hasService(/Secret Manager/i));
+  add('kms', 'Cloud KMS / CMEK', hasService(/Cloud KMS|CMEK/i));
+  add('iap', 'Identity-Aware Proxy', hasService(/Identity-Aware Proxy|IAP/i));
+  add('artifact-registry', 'Artifact Registry', hasService(/Artifact Registry/i));
+  add('cloud-build', 'Cloud Build', hasService(/Cloud Build/i));
+  add('vpc-service-controls', 'VPC Service Controls', hasService(/VPC Service Controls/i));
+
+  const knownPatterns = [
+    /Cloud Monitoring/i,
+    /Cloud Logging/i,
+    /Secret Manager/i,
+    /Cloud KMS|CMEK/i,
+    /Identity-Aware Proxy|IAP/i,
+    /Artifact Registry/i,
+    /Cloud Build/i,
+    /VPC Service Controls/i,
+    /Cloud Armor/i
+  ];
+  names.forEach(name => {
+    const label = String(name).trim();
+    if (!label || knownPatterns.some(pattern => pattern.test(label))) return;
+    if (/Operations|Logging|Monitoring|Backup|Build|Registry|Deploy|Pipeline|Security Command Center|Config|Policy|Audit/i.test(label)) {
+      add(label.toLowerCase(), label, true);
+    }
+  });
+
+  return services;
+}
+
+function renderOperationsPanel(rec) {
+  if (!operationsPanel || !operationsServices) return;
+  const services = collectOperationsServices(rec);
+  operationsServices.replaceChildren();
+  operationsPanel.hidden = services.length === 0;
+  services.forEach(service => {
+    const pill = document.createElement('span');
+    pill.className = 'operations-service-pill';
+    const icon = document.createElement('i');
+    icon.setAttribute('data-lucide', 'settings-2');
+    icon.style.cssText = 'width: 13px; height: 13px;';
+    pill.append(icon, document.createTextNode(service.label));
+    operationsServices.appendChild(pill);
+  });
+  if (window.lucide) window.lucide.createIcons();
 }
 
 function renderDiscoverySummary(rec) {
@@ -336,7 +413,7 @@ function getFormInputs() {
   const characteristics = normalizeCharacteristicProfiles(getCheckedValues('characteristics'), workloads);
 
   // Traffic, Access, Recovery & Growth
-  const accessPattern = document.getElementById('input-access-pattern').value;
+  const accessPattern = normalizeAccessPattern(document.getElementById('input-access-pattern').value);
   const trafficPattern = document.getElementById('input-traffic-pattern').value;
   const expectedUsers = getNonNegativeNumber('input-expected-users', 50000);
   const peakConcurrencyOverride = getOptionalNonNegativeNumber('input-peak-concurrency');
@@ -667,7 +744,7 @@ function syncFormInputs(inputs) {
   syncCheckboxes('input[name="characteristics"]', normalizeCharacteristicProfiles(inputs.characteristics, inputs.workloads));
 
   // Set Traffic, Access & Recovery fields
-  document.getElementById('input-access-pattern').value = inputs.accessPattern;
+  document.getElementById('input-access-pattern').value = normalizeAccessPattern(inputs.accessPattern);
   document.getElementById('input-traffic-pattern').value = inputs.trafficPattern;
   document.getElementById('input-expected-users').value = inputs.expectedUsers;
   document.getElementById('input-peak-concurrency').value = inputs.peakConcurrencyOverride ?? '';
@@ -843,6 +920,7 @@ function populateDashboard(rec, inputs = null) {
 
   // 9. Raw Mermaid Output
   outputMermaidRaw.textContent = rec.mermaid.trim();
+  renderOperationsPanel(rec);
 }
 
 // --- Mermaid Graph Renderer ---
@@ -985,7 +1063,7 @@ function exportMarkdownDocument() {
   md += `* <strong>Target Scalability:</strong> ${escapeHtml(rec.execSummary.scale)}\n`;
   md += `* <strong>Peak Concurrency Estimate:</strong> ${rec.workloadSizing.peakConcurrencyEstimate.toLocaleString()} users (${escapeHtml(rec.workloadSizing.peakConcurrencySource)})\n`;
   md += `* <strong>Resiliency Target:</strong> ${escapeHtml(rec.execSummary.availabilityTarget)}\n\n`;
-  md += `*Generated by CloudShift Architect Studio v3.2 RC*\n\n`;
+  md += `*Generated by CloudShift Architect Studio v3.3*\n\n`;
   md += `---\n\n`;
 
   // 1. Customer Discovery Summary

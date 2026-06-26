@@ -99,7 +99,7 @@ Currently supported:
 
 # Current Release
 
-**CloudShift Architect Studio v3.2 RC**
+**CloudShift Architect Studio v3.3**
 
 Current highlights:
 
