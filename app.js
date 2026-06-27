@@ -35,6 +35,7 @@ const outputCost = document.getElementById('output-cost');
 const outputMermaidRaw = document.getElementById('output-mermaid-raw');
 const operationsPanel = document.getElementById('operations-panel');
 const operationsServices = document.getElementById('operations-services');
+const mermaidSourcePanel = document.getElementById('mermaid-source-panel');
 // Outputs: Workload Sizing (Version 3.1)
 const customerDiscoverySummary = document.getElementById('customer-discovery-summary');
 const assessmentAssumptionSummary = document.getElementById('assessment-assumption-summary');
@@ -270,18 +271,34 @@ function collectOperationsServices(rec) {
 function renderOperationsPanel(rec) {
   if (!operationsPanel || !operationsServices) return;
   const services = collectOperationsServices(rec);
+  const iconMap = {
+    'Backup & Recovery': 'shield-check',
+    'Secret Manager': 'key-round',
+    'Cloud KMS / CMEK': 'lock-keyhole',
+    'Identity-Aware Proxy': 'fingerprint',
+    'VPC Service Controls': 'network'
+  };
   operationsServices.replaceChildren();
   operationsPanel.hidden = services.length === 0;
   services.forEach(service => {
     const pill = document.createElement('span');
     pill.className = 'operations-service-pill';
     const icon = document.createElement('i');
-    icon.setAttribute('data-lucide', 'settings-2');
-    icon.style.cssText = 'width: 13px; height: 13px;';
+    icon.setAttribute('data-lucide', iconMap[service.label] || 'cloud');
+    icon.style.cssText = 'width: 14px; height: 14px;';
     pill.append(icon, document.createTextNode(service.label));
     operationsServices.appendChild(pill);
   });
   if (window.lucide) window.lucide.createIcons();
+}
+
+function updateMermaidSourceToggleLabel() {
+  if (!mermaidSourcePanel) return;
+  const label = mermaidSourcePanel.querySelector('.mermaid-source-toggle');
+  if (!label) return;
+  label.textContent = mermaidSourcePanel.open
+    ? label.dataset.expandedLabel
+    : label.dataset.collapsedLabel;
 }
 
 function renderDiscoverySummary(rec) {
@@ -374,6 +391,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Bind Export Markdown Button
   if (btnExportMarkdown) {
     btnExportMarkdown.addEventListener('click', exportMarkdownDocument);
+  }
+
+  // Bind Mermaid Source Toggle
+  if (mermaidSourcePanel) {
+    mermaidSourcePanel.addEventListener('toggle', updateMermaidSourceToggleLabel);
+    updateMermaidSourceToggleLabel();
   }
 });
 

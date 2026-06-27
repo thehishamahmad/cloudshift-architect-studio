@@ -662,14 +662,13 @@
                 </div>
 
                 <!-- Code Accordion/Debug view -->
-                <div class="panel-card" style="margin-bottom: 0;">
-                  <h3 class="panel-card-title" style="margin-bottom: 8px; border-bottom: none; padding-bottom: 0;">
-                    <i data-lucide="code" style="width: 18px; height: 18px;"></i>
-                    Mermaid.js Code
-                  </h3>
-                  <pre id="output-mermaid-raw" style="background-color: var(--bg-hover); padding: 12px; border-radius: var(--radius-md); font-family: monospace; font-size: 0.8rem; overflow-x: auto; max-height: 200px; color: var(--color-text-secondary);">
+                <details class="mermaid-source-panel" id="mermaid-source-panel">
+                  <summary class="mermaid-source-summary">
+                    <span class="mermaid-source-toggle" data-collapsed-label="▼ Show Mermaid Source" data-expanded-label="▲ Hide Mermaid Source">▼ Show Mermaid Source</span>
+                  </summary>
+                  <pre id="output-mermaid-raw" class="mermaid-source-code">
                   </pre>
-                </div>
+                </details>
 
               </div>
             </div>
