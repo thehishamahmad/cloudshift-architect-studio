@@ -10,6 +10,45 @@ The project was designed to simulate the early stages of enterprise cloud soluti
 
 ---
 
+## Current Stable Release
+
+**Version:** v3.3
+
+**Status:** Stable Production Release
+
+CloudShift Architect Studio v3.3 is the current stable production release.
+
+All new features and enhancements are first developed, tested and validated locally before being manually published to the GitHub stable release.
+
+---
+
+## Development Workflow
+
+CloudShift follows a controlled release workflow:
+
+Development Workspace
+→ Architecture Review
+→ Implementation
+→ Testing & Validation
+→ Manual GitHub Release
+→ Stable Production Release
+
+The GitHub repository always represents the latest stable production release.
+
+---
+
+## Release Philosophy
+
+CloudShift Architect Studio follows an incremental release model.
+
+* Stable releases are published to GitHub only after successful validation.
+* New features are developed in a separate local development workspace.
+* Recommendation logic is preserved whenever possible to minimise regression.
+* UI/UX improvements must not alter recommendation behaviour.
+* Significant architectural changes are discussed before implementation.
+
+---
+
 # Key Features
 
 ## Enterprise Discovery Assessment
@@ -113,21 +152,40 @@ Current highlights:
 
 ---
 
-# Roadmap
+# Product Roadmap
 
-## v3.3
+## Current Stable Release
+
+✅ CloudShift Architect Studio v3.3
+
+Current production-ready release.
+
+## Next Development Release
+
+🚧 CloudShift Architect Studio v3.4
+
+Primary focus areas:
+
+* UX improvements
+* Additional presales capabilities
+* Enterprise architecture enhancements
+* Developer productivity improvements
+
+Planned capabilities under consideration:
 
 * Professional PDF Export
 * Multi-region Architecture
 * Cost Optimisation Advisor
 * Security Maturity Assessment
 
-## v4.0
+## Future Release Ideas
 
 * AI Proposal Writer
 * AI Architecture Review
 * AI Solution Comparison
 * Executive Presentation Generator
+
+Future releases will continue to prioritise solving real-world Google Cloud presales challenges while keeping the platform simple, maintainable and enterprise-ready.
 
 ---
 
